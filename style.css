@@ -1,0 +1,47 @@
+h1 {
+}
+
+body {
+    /* background-color: #326938 ; */
+}
+
+div {
+    border: 1px solid black;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.content {
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    min-width: 800;
+    min-height: 400;
+    width: 80%;
+    height: 90%;
+}
+
+.tab {
+    width: 48%;
+    height:100%;
+    display: inline-block;
+}
+
+.sidebar {
+    width: 4%;
+    height:100%;
+    padding: 2px;
+    display: inline-block;
+}
+
+.social-icon {
+    padding: 10px;
+    margin-bottom: 10px
+}
+
+
+
+.footer {
+    width: 100%;
+    background-color: skyblue
+}
