@@ -15,14 +15,67 @@
                 <img class='social-icon' src="github-icon.svg" alt="Github icon" />
             </a>
         </div>
-        <div class='tab' id='left-tab'>
-            tab1
+        
+        <div class='tab-panel' id='left-tab-panel'>
+            <div class='tab-label-area'>
+                <div class='tab-label' targetTabId='tab-l0'>
+                    tab0 label
+                </div>
+                <div class='tab-label' targetTabId='tab-l1'>
+                    tab1 label
+                </div>
+            </div>
+            <div class='tab-text-area' id='tab-l0'>
+                Gavin's resume!
+            </div>
+            <div class='tab-text-area' id='tab-l1'>
+                Some code!
+            </div>
         </div>
-        <div class='tab' id='right-tab'>
+        <div class='tab-panel' id='right-tab'>
             tab2
         </div>
     </div>
+
     <div class='footer'>
         feature/gavindavidson.io
     </div>
 </div>
+
+<script>
+
+function hideTabs(tabs) {
+    for (var offset = 0; offset < tabs.length; offset++) {
+        tabs[offset].style.display = "none";
+    }
+}
+
+function resetTabLabels(tabLabels) {
+    for (var offset = 0; offset < tabLabels.length; offset++) {
+        tabLabels[offset].style.background = "white";
+    }
+}
+
+function switchToTab(tabGroup, tabLabelGroup, tab, tabLabel) {
+    hideTabs(tabGroup);
+    resetTabLabels(tabLabelGroup);
+    tab.style.display = "block";
+    tabLabel.style.background = "gray";
+}
+
+var tabLabels = document.getElementsByClassName("tab-label");
+
+var leftTabs = document.getElementById("left-tab-panel").getElementsByClassName("tab-text-area");
+
+for (var offset = 0; offset < tabLabels.length; offset++){
+    let tabLabel = tabLabels[offset];
+    let targetTabId = tabLabel.attributes['targetTabId'].value;
+
+    tabLabel.addEventListener("click", function() {
+        switchToTab(leftTabs,tabLabels, document.getElementById(targetTabId), tabLabel);
+    }, false);
+}
+
+switchToTab(leftTabs, tabLabels, leftTabs[0], tabLabels[0])
+
+</script>

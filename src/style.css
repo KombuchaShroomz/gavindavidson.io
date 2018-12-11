@@ -26,18 +26,39 @@ div {
     flex-direction: row;
 }
 
-.tab {
-    height:100%;
-    display: inline-block;
+.tab-panel {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
 }
 
-#left-tab {
+.tab-text-area{
+    flex-grow: 1;
+}
+
+.tab-label-area {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+
+.tab-label {
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* #left-tab {
     width: 50%;
 }
 
 #right-tab {
     width: 50%;
-}
+} */
 
 .sidebar {
     width: 50px;
