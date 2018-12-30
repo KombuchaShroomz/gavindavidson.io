@@ -19,12 +19,12 @@
         </div>
 
         <div class='tab-panel' id='left-tab-panel'>
-            <div class='tab-label-area default-tab'>
-                <div class='tab-label' data_targetTabId='tab-l0'>
-                    tab0 label
+            <div class='tab-label-area'>
+                <div class='tab-label default-tab' data_targetTabId='tab-l0'>
+                    index.html
                 </div>
                 <div class='tab-label' data_targetTabId='tab-l1'>
-                    tab1 label
+                    django.py
                 </div>
             </div>
             <div class='tab-text-area' id='tab-l0'>
@@ -35,11 +35,18 @@
                 ## Melbourne, Victoria
             </div>
             <div class='tab-text-area' id='tab-l1'>
-                Tab 2
+                Some python
             </div>
         </div>
-        <div class='tab-panel' id='right-tab'>
-            tab2
+        <div class='tab-panel' id='right-tab-panel'>
+            <div class='tab-label-area'>
+                <div class='tab-label' data_targetTabId='tab-r0'>
+                    cake.php
+                </div>
+            </div>
+            <div class='tab-text-area' id='tab-r0'>
+                Some php
+            </div>
         </div>
     </div>
 
@@ -73,32 +80,41 @@
         }
     }
 
-    function resetTabLabels(tabLabels) {
-        for (var offset = 0; offset < tabLabels.length; offset++) {
-            tabLabels[offset].style.background = "white";
+    function resetTabLabels() {
+        var activeLabels = document.getElementsByClassName("tab-label-active");
+
+        for (var offset = 0; offset < activeLabels.length; offset++) {
+            current = activeLabels[offset];
+            current.className = current.className.replace(" tab-label-active", "");
         }
     }
 
-    function switchToTab(tabGroup, tabLabelGroup, tab, tabLabel) {
-        hideTabs(tabGroup);
-        resetTabLabels(tabLabelGroup);
-        tab.style.display = "block";
-        tabLabel.style.background = "gray";
+    function setActiveTabLabel(tabLabel) {
+        tabLabel.className += " tab-label-active"
     }
 
-    var tabLabels = document.getElementsByClassName("tab-label");
+    function switchToTab(tabGroup, tab, tabLabel) {
+        hideTabs(tabGroup);
+        resetTabLabels();
+        tab.style.display = "block";
+        setActiveTabLabel(tabLabel);
+    }
+
+    var leftTabLabels = document.getElementsByClassName("tab-label");
 
     var leftTabs = document.getElementById("left-tab-panel").getElementsByClassName("tab-text-area");
 
-    for (var offset = 0; offset < tabLabels.length; offset++) {
-        let tabLabel = tabLabels[offset];
+    var defaultTabLabel = document.getElementsByClassName("tab-label default-tab");
+
+    for (var offset = 0; offset < leftTabLabels.length; offset++) {
+        let tabLabel = leftTabLabels[offset];
         let targetTabId = tabLabel.attributes['data_targetTabId'].value;
 
         tabLabel.addEventListener("click", function () {
-            switchToTab(leftTabs, tabLabels, document.getElementById(targetTabId), tabLabel);
+            switchToTab(leftTabs, document.getElementById(targetTabId), tabLabel);
         }, false);
     }
 
-    switchToTab(leftTabs, tabLabels, leftTabs[0], tabLabels[0])
+    switchToTab(leftTabs, leftTabs[0], defaultTabLabel[0])
 
 </script>
