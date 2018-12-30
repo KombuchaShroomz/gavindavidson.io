@@ -1,5 +1,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 </head>
 
 <div class='content'>
@@ -15,21 +17,25 @@
                 <img class='social-icon' src="github-icon.svg" alt="Github icon" />
             </a>
         </div>
-        
+
         <div class='tab-panel' id='left-tab-panel'>
-            <div class='tab-label-area'>
-                <div class='tab-label' targetTabId='tab-l0'>
+            <div class='tab-label-area default-tab'>
+                <div class='tab-label' data_targetTabId='tab-l0'>
                     tab0 label
                 </div>
-                <div class='tab-label' targetTabId='tab-l1'>
+                <div class='tab-label' data_targetTabId='tab-l1'>
                     tab1 label
                 </div>
             </div>
             <div class='tab-text-area' id='tab-l0'>
-                Gavin's resume!
+                # Gavin Davidson<br>
+                <br>
+                ## Software Developer<br>
+                <br>
+                ## Melbourne, Victoria
             </div>
             <div class='tab-text-area' id='tab-l1'>
-                Some code!
+                Tab 2
             </div>
         </div>
         <div class='tab-panel' id='right-tab'>
@@ -38,44 +44,61 @@
     </div>
 
     <div class='footer'>
-        feature/gavindavidson.io
+        <div class='footer-content'>
+            <div class='footer-icon-block left'>
+                <img class='footer-icon' src="git-icon.svg" alt="Branch" />
+                feature/gavindavidson.io
+                <img class='footer-icon' src="sync-icon.svg" alt="Synchronize" />
+            </div>
+
+            <div class='footer-icon-block left'>
+                <img class='footer-icon' src="x-icon.svg" alt="Errors" />
+                0
+                <img class='footer-icon' src="warning-icon.svg" alt="Warnings" />
+                0
+                <img class='footer-icon' src="info-icon.svg" alt="Information" />
+                0
+            </div>
+            <div class='right'>
+                HTML
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-
-function hideTabs(tabs) {
-    for (var offset = 0; offset < tabs.length; offset++) {
-        tabs[offset].style.display = "none";
+    function hideTabs(tabs) {
+        for (var offset = 0; offset < tabs.length; offset++) {
+            tabs[offset].style.display = "none";
+        }
     }
-}
 
-function resetTabLabels(tabLabels) {
+    function resetTabLabels(tabLabels) {
+        for (var offset = 0; offset < tabLabels.length; offset++) {
+            tabLabels[offset].style.background = "white";
+        }
+    }
+
+    function switchToTab(tabGroup, tabLabelGroup, tab, tabLabel) {
+        hideTabs(tabGroup);
+        resetTabLabels(tabLabelGroup);
+        tab.style.display = "block";
+        tabLabel.style.background = "gray";
+    }
+
+    var tabLabels = document.getElementsByClassName("tab-label");
+
+    var leftTabs = document.getElementById("left-tab-panel").getElementsByClassName("tab-text-area");
+
     for (var offset = 0; offset < tabLabels.length; offset++) {
-        tabLabels[offset].style.background = "white";
+        let tabLabel = tabLabels[offset];
+        let targetTabId = tabLabel.attributes['data_targetTabId'].value;
+
+        tabLabel.addEventListener("click", function () {
+            switchToTab(leftTabs, tabLabels, document.getElementById(targetTabId), tabLabel);
+        }, false);
     }
-}
 
-function switchToTab(tabGroup, tabLabelGroup, tab, tabLabel) {
-    hideTabs(tabGroup);
-    resetTabLabels(tabLabelGroup);
-    tab.style.display = "block";
-    tabLabel.style.background = "gray";
-}
-
-var tabLabels = document.getElementsByClassName("tab-label");
-
-var leftTabs = document.getElementById("left-tab-panel").getElementsByClassName("tab-text-area");
-
-for (var offset = 0; offset < tabLabels.length; offset++){
-    let tabLabel = tabLabels[offset];
-    let targetTabId = tabLabel.attributes['targetTabId'].value;
-
-    tabLabel.addEventListener("click", function() {
-        switchToTab(leftTabs,tabLabels, document.getElementById(targetTabId), tabLabel);
-    }, false);
-}
-
-switchToTab(leftTabs, tabLabels, leftTabs[0], tabLabels[0])
+    switchToTab(leftTabs, tabLabels, leftTabs[0], tabLabels[0])
 
 </script>

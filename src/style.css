@@ -34,6 +34,7 @@ div {
 
 .tab-text-area{
     flex-grow: 1;
+    font-family: 'Source Code Pro', monospace;
 }
 
 .tab-label-area {
@@ -52,14 +53,6 @@ div {
     padding-right: 10px;
 }
 
-/* #left-tab {
-    width: 50%;
-}
-
-#right-tab {
-    width: 50%;
-} */
-
 .sidebar {
     width: 50px;
     height: 100%;
@@ -70,7 +63,34 @@ div {
     margin-bottom: 10px
 }
 
+.footer-icon {
+    /* padding-left: 10px; */
+}
+
 .footer {
     width: 100%;
-    background-color: skyblue
+    background-color: #007ACC;
+}
+
+.footer-content {
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+    font-family: 'Muli', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.footer-content > .right {
+    text-align: right;
+}
+
+.footer-content > .left {
+    float: left;
+}
+
+.footer-icon-block {
+    padding-left: 10px;
+    display: inline-block;
 }
