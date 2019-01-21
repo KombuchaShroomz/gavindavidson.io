@@ -70,6 +70,14 @@ body {
     background: #1E1E1E;
 }
 
+.tab-active {
+    display: block;
+}
+
+.tab-inactive {
+    display: none;
+}
+
 .sidebar {
     width: 50px;
     height: 100%;

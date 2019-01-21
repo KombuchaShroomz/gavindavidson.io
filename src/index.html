@@ -82,7 +82,14 @@
 <script>
     function hideTabs(tabs){
         for (var offset = 0; offset < tabs.length; offset++) {
-            tabs[offset].style.display = "none";
+            tabClassName = tabs[offset].className;
+            if (tabClassName.includes("tab-active")){
+                tabClassName = tabClassName.replace("tab-active", "tab-inactive");
+            }
+            else if (!tabClassName.includes("tab-inactive")){
+                tabClassName += " tab-inactive";
+            }
+            tabs[offset].className = tabClassName;
         }
     }
 
@@ -99,12 +106,17 @@
         tabLabel.className += " tab-label-active"
     }
 
+    function setActiveTab(tab){
+        tab.className = tab.className.replace("tab-inactive", "tab-active");
+    }
+
     function switchToTab(tabGroup, tabLabel){
-        hideTabs(tabGroup);
-        resetTabLabels();
         let targetTab = getTabForLabel(tabGroup, tabLabel);
-        targetTab.style.display = "block";
+
+        resetTabLabels();
+        hideTabs(tabGroup);
         setActiveTabLabel(tabLabel);
+        setActiveTab(targetTab);
     }
 
     function getTabForLabel(tabs, tabLabel){
@@ -134,9 +146,6 @@
 
     var leftDefaultTabLabel = leftTabPanel.getElementsByClassName("tab-label default-tab")[0];
     var rightDefaultTabLabel = rightTabPanel.getElementsByClassName("tab-label default-tab")[0];
-
-    console.log(leftDefaultTabLabel);
-    console.log(rightDefaultTabLabel);
 
     initializeTabGroups(leftTabLabels, leftTabs, leftDefaultTabLabel);
     initializeTabGroups(rightTabLabels, rightTabs, rightDefaultTabLabel);
