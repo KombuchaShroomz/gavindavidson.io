@@ -40,12 +40,18 @@
         </div>
         <div class='tab-panel' id='right-tab-panel'>
             <div class='tab-label-area'>
-                <div class='tab-label' data_targetTabId='tab-r0'>
+                <div class='tab-label default-tab' data_targetTabId='tab-r0'>
                     cake.php
+                </div>
+                <div class='tab-label' data_targetTabId='tab-r1'>
+                    django.py
                 </div>
             </div>
             <div class='tab-text-area' id='tab-r0'>
                 Some php
+            </div>
+            <div class='tab-text-area' id='tab-r1'>
+                Some python
             </div>
         </div>
     </div>
@@ -74,47 +80,65 @@
 </div>
 
 <script>
-    function hideTabs(tabs) {
+    function hideTabs(tabs){
         for (var offset = 0; offset < tabs.length; offset++) {
             tabs[offset].style.display = "none";
         }
     }
 
-    function resetTabLabels() {
+    function resetTabLabels(){
         var activeLabels = document.getElementsByClassName("tab-label-active");
 
-        for (var offset = 0; offset < activeLabels.length; offset++) {
+        for (var offset = 0; offset < activeLabels.length; offset++){
             current = activeLabels[offset];
             current.className = current.className.replace(" tab-label-active", "");
         }
     }
 
-    function setActiveTabLabel(tabLabel) {
+    function setActiveTabLabel(tabLabel){
         tabLabel.className += " tab-label-active"
     }
 
-    function switchToTab(tabGroup, tab, tabLabel) {
+    function switchToTab(tabGroup, tabLabel){
         hideTabs(tabGroup);
         resetTabLabels();
-        tab.style.display = "block";
+        let targetTab = getTabForLabel(tabGroup, tabLabel);
+        targetTab.style.display = "block";
         setActiveTabLabel(tabLabel);
     }
 
-    var leftTabLabels = document.getElementsByClassName("tab-label");
-
-    var leftTabs = document.getElementById("left-tab-panel").getElementsByClassName("tab-text-area");
-
-    var defaultTabLabel = document.getElementsByClassName("tab-label default-tab");
-
-    for (var offset = 0; offset < leftTabLabels.length; offset++) {
-        let tabLabel = leftTabLabels[offset];
+    function getTabForLabel(tabs, tabLabel){
         let targetTabId = tabLabel.attributes['data_targetTabId'].value;
-
-        tabLabel.addEventListener("click", function () {
-            switchToTab(leftTabs, document.getElementById(targetTabId), tabLabel);
-        }, false);
+        return document.getElementById(targetTabId);
     }
 
-    switchToTab(leftTabs, leftTabs[0], defaultTabLabel[0])
+    function initializeTabGroups(tabLables, tabs, defaultTabLabel){
+        for (var offset = 0; offset < tabLables.length; offset++){
+            let tabLabel = tabLables[offset];
+            tabLabel.addEventListener("click", function () {
+                switchToTab(tabs, tabLabel);
+            }, false);
+        }
+
+        switchToTab(tabs, defaultTabLabel)
+    }
+
+    let leftTabPanel = document.getElementById("left-tab-panel"); 
+    let rightTabPanel = document.getElementById("right-tab-panel"); 
+
+    var leftTabLabels = leftTabPanel.getElementsByClassName("tab-label");
+    var rightTabLabels = rightTabPanel.getElementsByClassName("tab-label");
+
+    var leftTabs = leftTabPanel.getElementsByClassName("tab-text-area");
+    var rightTabs = rightTabPanel.getElementsByClassName("tab-text-area");
+
+    var leftDefaultTabLabel = leftTabPanel.getElementsByClassName("tab-label default-tab")[0];
+    var rightDefaultTabLabel = rightTabPanel.getElementsByClassName("tab-label default-tab")[0];
+
+    console.log(leftDefaultTabLabel);
+    console.log(rightDefaultTabLabel);
+
+    initializeTabGroups(leftTabLabels, leftTabs, leftDefaultTabLabel);
+    initializeTabGroups(rightTabLabels, rightTabs, rightDefaultTabLabel);
 
 </script>
