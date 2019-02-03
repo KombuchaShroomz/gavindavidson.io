@@ -85,12 +85,6 @@ body {
     background-color: #007ACC;
 }
 
-pre {
-    height: auto;
-    max-height: 80%;
-    overflow: auto;
-}​
-
 .footer-content {
     margin-left: 10px;
     margin-right: 10px;
@@ -111,4 +105,10 @@ pre {
 .footer-icon-block {
     padding-left: 10px;
     display: inline-block;
-}   
+}  
+
+pre {
+    height: auto;
+    max-height: 80%;
+    overflow: auto;
+}​
