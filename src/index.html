@@ -2,6 +2,9 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/vs2015.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
 <div class='content'>
@@ -28,30 +31,106 @@
                 </div>
             </div>
             <div class='tab-text-area' id='tab-l0'>
-                # Gavin Davidson<br>
-                <br>
-                ## Software Developer<br>
-                <br>
-                ## Melbourne, Victoria
+                <pre style='white-space: pre-wrap'><code class="Markdown"># Gavin Davidson
+
+## Software Developer
+
+Focussed on backend web services development, but interested in all aspects of product development.
+
+## Melbourne, Victoria
+
+Originally from Scotland, but enjoying life in warmer climes.</code></pre>
             </div>
             <div class='tab-text-area' id='tab-l1'>
-                Some python
+                    <pre style='white-space: pre-wrap'><code class="Python">from django.shortcuts import render
+
+def band_listing(request):
+    """A view of all bands."""
+    bands = models.Band.objects.all()
+    return render(request, 'bands/band_listing.html', {'bands': bands})</code></pre>
             </div>
         </div>
         <div class='tab-panel' id='right-tab-panel'>
             <div class='tab-label-area'>
                 <div class='tab-label default-tab' data_targetTabId='tab-r0'>
-                    cake.php
+                    ASPNET.cs
                 </div>
                 <div class='tab-label' data_targetTabId='tab-r1'>
-                    django.py
+                    cake.php
                 </div>
             </div>
             <div class='tab-text-area' id='tab-r0'>
-                Some php
+                <pre><code class='C#'>using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using Gavindavidson.Io.Helpers;
+using Microsoft.Extensions.Options;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Gavindavidson.Io.Services;
+using Gavindavidson.Io.ViewModels;
+using Gavindavidson.Io.Entities;
+
+namespace Gavindavidson.Io.Controllers
+{
+    [Authorize]
+    [Route("[controller]")]
+    public class UsersController : ControllerBase
+    {
+        private IUserService _userService;
+        private IMapper _mapper;
+        private readonly AppSettings _appSettings;
+
+        public UsersController(
+            IUserService userService,
+            IMapper mapper,
+            IOptions<AppSettings> appSettings)
+        {
+            _userService = userService;
+            _mapper = mapper;
+            _appSettings = appSettings.Value;
+        }
+
+        [HttpGet]
+        public IActionResult GetList()
+        {
+            var users =  _userService.GetAll();
+            var userViewModels = _mapper.Map<IList<UserViewModel>>(users);
+            return Ok(userViewModels);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetDetail(int id)
+        {
+            var user =  _userService.GetById(id);
+            var userViewModel = _mapper.Map<UserViewModel>(user);
+            return Ok(userViewModel);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody]UserViewModel userViewModel)
+        {
+            var user = _mapper.Map<User>(userViewModel);
+            user.Id = id;
+
+            try 
+            {
+                _userService.Update(user, userViewModel.Password);
+                return Ok();
+            } 
+            catch(AppException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+    }
+}</code></pre>
             </div>
             <div class='tab-text-area' id='tab-r1'>
-                Some python
+                Some php
             </div>
         </div>
     </div>

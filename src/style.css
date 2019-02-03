@@ -1,6 +1,3 @@
-h1 {
-}
-
 body {
     background-color: #464646;
     font-family: 'Muli', sans-serif;
@@ -9,12 +6,6 @@ body {
 #left-tab-panel {
     border: 1px solid #333333;
 }
-
-/* .main-content {
-    border: 1px solid black;
-    box-sizing: border-box;
-    vertical-align: top;
-} */
 
 .content {
     margin: auto;
@@ -89,14 +80,16 @@ body {
     margin-bottom: 10px
 }
 
-.footer-icon {
-    /* padding-left: 10px; */
-}
-
 .footer {
     width: 100%;
     background-color: #007ACC;
 }
+
+pre {
+    height: auto;
+    max-height: 80%;
+    overflow: auto;
+}​
 
 .footer-content {
     margin-left: 10px;
@@ -118,4 +111,4 @@ body {
 .footer-icon-block {
     padding-left: 10px;
     display: inline-block;
-}
+}   
