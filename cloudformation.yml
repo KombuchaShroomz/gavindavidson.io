@@ -1,0 +1,26 @@
+Resources:
+  bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: 'gavindavidson.io'
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+  bucketPublicAccessPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref bucket
+      PolicyDocument:
+        Statement:
+        - 
+          Action: 
+            - 's3:GetObject'
+          Effect: 'Allow'
+          Principal: '*'
+          Resource:
+            Fn::Join: 
+              - ''
+              - 
+                - 'arn:aws:s3:::'
+                - !Ref bucket
+                - '/*'
