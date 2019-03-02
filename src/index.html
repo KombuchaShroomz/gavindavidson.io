@@ -24,7 +24,7 @@
         <div class='tab-panel' id='left-tab-panel'>
             <div class='tab-label-area'>
                 <div class='tab-label default-tab' data_targetTabId='tab-l0'>
-                    index.html
+                    index.md
                 </div>
                 <div class='tab-label' data_targetTabId='tab-l1'>
                     django.py
@@ -130,7 +130,80 @@ namespace Gavindavidson.Io.Controllers
 }</code></pre>
             </div>
             <div class='tab-text-area' id='tab-r1'>
-                Some php
+                    <pre><code class='php'>App::uses("AppController", "Controller");
+
+use Valitron\Validator;
+
+class CakesController extends AppController {
+
+    public $components = array("CakeData", "UserManagement");
+
+    public function detail(){
+        $cakeId = $this->request->params["id"];
+        $cake = $this->CakeData->getDetail($cakeId);
+
+        if (!$this->CakeData->UserOwnsCake($cake))
+        {
+            $this->response->statusCode(401);
+            return $this->response;
+        }
+
+        $this->response->body(json_encode($cake));
+        $this->response->type("application/json");
+        $this->response->statusCode(200);
+
+        return $this->response;
+    }
+
+    public function list(){
+        $cakes = $this->CakeData->getList();
+
+        if (!$this->UserManagement->userIsBaker()){
+        {
+            $this->response->statusCode(401);
+            return $this->response;
+        }
+
+        $this->response->body(json_encode($cakes));
+        $this->response->type("application/json");
+        $this->response->statusCode(200);
+
+        return $this->response;
+    }
+
+    public function create(){
+        $requestBody = $this->request->input("json_decode", true);
+        $validator = $this->CakeData->validator($requestBody);
+        $this->response->type("application/json");
+
+        if($validator->validate()) {
+
+            if (!$this->UserManagement->userIsBaker()){
+            {
+                $this->response->statusCode(401);
+                return $this->response;
+            }
+
+            $createdCake = $this->CakeData->create($requestBody);
+
+            if ($createdCake) {
+                $this->response->statusCode(201);
+                $this->response->body(json_encode($createdCake));
+            }
+            else
+            {
+                $this->response->statusCode(500);
+            }
+        }
+        else {
+            $this->response->body(json_encode(array("errors" => $validator->errors())));
+            $this->response->statusCode(400);
+        }
+
+        return $this->response;
+    }
+}
+                    </code></pre>
             </div>
         </div>
     </div>

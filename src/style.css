@@ -34,7 +34,7 @@ body {
     font-family: 'Source Code Pro', monospace;
     background: #1E1E1E;
     color: white;
-    padding: 15px;
+    padding-left: 15px;
 }
 
 .tab-label-area {
@@ -109,6 +109,7 @@ body {
 
 pre {
     height: auto;
-    max-height: 80%;
+    max-height: 90%;
     overflow: auto;
+    margin: 0em;
 }​
