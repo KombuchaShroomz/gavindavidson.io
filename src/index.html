@@ -29,7 +29,7 @@
         <div class='tab-panel' id='left-tab-panel'>
             <div class='tab-label-area'>
                 <div class='tab-label default-tab' data_targetTabId='tab-l0'>
-                    index.md
+                    README.md
                 </div>
                 <div class='tab-label' data_targetTabId='tab-l1'>
                     django.py
@@ -92,7 +92,7 @@ namespace Gavindavidson.Io.Controllers
         public UsersController(
             IUserService userService,
             IMapper mapper,
-            IOptions<AppSettings> appSettings)
+            IOptions&lt;AppSettings&gt; appSettings)
         {
             _userService = userService;
             _mapper = mapper;
@@ -103,7 +103,7 @@ namespace Gavindavidson.Io.Controllers
         public IActionResult GetList()
         {
             var users =  _userService.GetAll();
-            var userViewModels = _mapper.Map<IList<UserViewModel>>(users);
+            var userViewModels = _mapper.Map&lt;IList&lt;UserViewModel&gt;&gt;(users);
             return Ok(userViewModels);
         }
 
@@ -111,14 +111,14 @@ namespace Gavindavidson.Io.Controllers
         public IActionResult GetDetail(int id)
         {
             var user =  _userService.GetById(id);
-            var userViewModel = _mapper.Map<UserViewModel>(user);
+            var userViewModel = _mapper.Map&lt;UserViewModel&gt;(user);
             return Ok(userViewModel);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]UserViewModel userViewModel)
         {
-            var user = _mapper.Map<User>(userViewModel);
+            var user = _mapper.Map&lt;User&gt;(userViewModel);
             user.Id = id;
 
             try 
@@ -135,7 +135,9 @@ namespace Gavindavidson.Io.Controllers
 }</code></pre>
             </div>
             <div class='tab-text-area' id='tab-r1'>
-                    <pre><code class='php'>App::uses("AppController", "Controller");
+                    <pre><code class='php'>&lt;?php
+                        
+App::uses("AppController", "Controller");
 
 use Valitron\Validator;
 
