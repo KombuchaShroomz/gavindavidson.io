@@ -71,8 +71,9 @@ body {
 }
 
 .sidebar {
-    width: 50px;
+    width: 44px;
     background: #333333;
+    padding: 4px;
 }
 
 .social-icon {
