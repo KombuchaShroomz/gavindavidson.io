@@ -11,10 +11,10 @@ body {
     margin: auto;
     margin-top: 30px;
     margin-bottom: 30px;
-    min-width: 800px;
-    min-height: 400px;
-    width: 80%;
-    height: 90%;
+    min-width: 80vw;
+    min-height: 40vh;
+    width: 80vw;
+    height: 90vh;
 }
 
 .main-content {
@@ -30,6 +30,7 @@ body {
 }
 
 .tab-text-area{
+    overflow: scroll;
     flex-grow: 1;
     font-family: 'Source Code Pro', monospace;
     background: #1E1E1E;
