@@ -32,6 +32,9 @@
                     README.md
                 </div>
                 <div class='tab-label' data_targetTabId='tab-l1'>
+                    cloudformation.yml
+                </div>
+                <div class='tab-label' data_targetTabId='tab-l2'>
                     django.py
                 </div>
             </div>
@@ -47,6 +50,35 @@ Focussed on backend services development at both the application and infrastruct
 Originally from Scotland, but enjoying life in warmer climes.</code></pre>
             </div>
             <div class='tab-text-area' id='tab-l1'>
+                <pre style='white-space: pre-wrap'><code class="YAML">Resources:
+    bucket:
+        Type: AWS::S3::Bucket
+        Properties:
+        BucketName: 'gavindavidson.io'
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+            IndexDocument: index.html
+    bucketPublicAccessPolicy:
+        Type: AWS::S3::BucketPolicy
+        Properties:
+        Bucket: !Ref bucket
+        PolicyDocument:
+            Statement:
+            - 
+            Action: 
+                - 's3:GetObject'
+            Effect: 'Allow'
+            Principal: '*'
+            Resource:
+                Fn::Join: 
+                - ''
+                - 
+                    - 'arn:aws:s3:::'
+                    - !Ref bucket
+                    - '/*'
+                  </code></pre>
+            </div>
+            <div class='tab-text-area' id='tab-l2'>
                     <pre style='white-space: pre-wrap'><code class="Python">from django.shortcuts import render
 
 def band_listing(request):
@@ -306,7 +338,7 @@ class CakesController extends AppController {
     var leftDefaultTabLabel = leftTabPanel.getElementsByClassName("tab-label default-tab")[0];
     var rightDefaultTabLabel = rightTabPanel.getElementsByClassName("tab-label default-tab")[0];
 
-    initializeTabGroups(leftTabLabels, leftTabs, leftDefaultTabLabel);
     initializeTabGroups(rightTabLabels, rightTabs, rightDefaultTabLabel);
+    initializeTabGroups(leftTabLabels, leftTabs, leftDefaultTabLabel);
 
 </script>
