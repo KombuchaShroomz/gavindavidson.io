@@ -2,12 +2,13 @@
     <title>Gavin Davidson</title>
     <meta name="description" content="Backend application and cloud infrastructure developer">
     <meta name="keywords" content="developer,software,backend,API,AWS,application">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/vs2015.min.css">
-    
+
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
@@ -30,20 +31,22 @@
             </a>
         </div>
 
-        <div class='tab-panel' id='left-tab-panel'>
-            <div class='tab-label-area'>
-                <div class='tab-label default-tab' data_targetTabId='tab-l0'>
-                    README.md
+        <div class='tab-panel-area'>
+
+            <div class='tab-panel' id='left-tab-panel'>
+                <div class='tab-label-area'>
+                    <div class='tab-label default-tab' data_targetTabId='tab-l0'>
+                        README.md
+                    </div>
+                    <div class='tab-label' data_targetTabId='tab-l1'>
+                        cloudformation.yml
+                    </div>
+                    <div class='tab-label' data_targetTabId='tab-l2'>
+                        django.py
+                    </div>
                 </div>
-                <div class='tab-label' data_targetTabId='tab-l1'>
-                    cloudformation.yml
-                </div>
-                <div class='tab-label' data_targetTabId='tab-l2'>
-                    django.py
-                </div>
-            </div>
-            <div class='tab-text-area' id='tab-l0'>
-                <pre style='white-space: pre-wrap'><code class="Markdown"># Gavin Davidson
+                <div class='tab-text-area' id='tab-l0'>
+                    <pre style='white-space: pre-wrap'><code class="Markdown"># Gavin Davidson
 
 ## Software Developer
 
@@ -52,9 +55,9 @@ Focussed on backend services development at both the application and infrastruct
 ## Melbourne, Victoria
 
 Originally from Scotland, but enjoying life in warmer climes.</code></pre>
-            </div>
-            <div class='tab-text-area' id='tab-l1'>
-                <pre style='white-space: pre-wrap'><code class="YAML">Resources:
+                </div>
+                <div class='tab-text-area' id='tab-l1'>
+                    <pre style='white-space: pre-wrap'><code class="YAML">Resources:
     bucket:
         Type: AWS::S3::Bucket
         Properties:
@@ -81,27 +84,27 @@ Originally from Scotland, but enjoying life in warmer climes.</code></pre>
                     - !Ref bucket
                     - '/*'
                   </code></pre>
-            </div>
-            <div class='tab-text-area' id='tab-l2'>
+                </div>
+                <div class='tab-text-area' id='tab-l2'>
                     <pre style='white-space: pre-wrap'><code class="Python">from django.shortcuts import render
 
 def band_listing(request):
     """A view of all bands."""
     bands = models.Band.objects.all()
     return render(request, 'bands/band_listing.html', {'bands': bands})</code></pre>
-            </div>
-        </div>
-        <div class='tab-panel' id='right-tab-panel'>
-            <div class='tab-label-area'>
-                <div class='tab-label default-tab' data_targetTabId='tab-r0'>
-                    ASPNET.cs
-                </div>
-                <div class='tab-label' data_targetTabId='tab-r1'>
-                    cake.php
                 </div>
             </div>
-            <div class='tab-text-area' id='tab-r0'>
-                <pre><code class='C#'>using System;
+            <div class='tab-panel' id='right-tab-panel'>
+                <div class='tab-label-area'>
+                    <div class='tab-label default-tab' data_targetTabId='tab-r0'>
+                        ASPNET.cs
+                    </div>
+                    <div class='tab-label' data_targetTabId='tab-r1'>
+                        cake.php
+                    </div>
+                </div>
+                <div class='tab-text-area' id='tab-r0'>
+                    <pre><code class='C#'>using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
@@ -169,8 +172,8 @@ namespace Gavindavidson.Io.Controllers
         }
     }
 }</code></pre>
-            </div>
-            <div class='tab-text-area' id='tab-r1'>
+                </div>
+                <div class='tab-text-area' id='tab-r1'>
                     <pre><code class='php'>&lt;?php
                         
 App::uses("AppController", "Controller");
@@ -247,6 +250,7 @@ class CakesController extends AppController {
     }
 }
                     </code></pre>
+                </div>
             </div>
         </div>
     </div>
@@ -275,37 +279,37 @@ class CakesController extends AppController {
 </div>
 
 <script>
-    function hideTabs(tabs){
+    function hideTabs(tabs) {
         for (var offset = 0; offset < tabs.length; offset++) {
             tabClassName = tabs[offset].className;
-            if (tabClassName.includes("tab-active")){
+            if (tabClassName.includes("tab-active")) {
                 tabClassName = tabClassName.replace("tab-active", "tab-inactive");
             }
-            else if (!tabClassName.includes("tab-inactive")){
+            else if (!tabClassName.includes("tab-inactive")) {
                 tabClassName += " tab-inactive";
             }
             tabs[offset].className = tabClassName;
         }
     }
 
-    function resetTabLabels(){
+    function resetTabLabels() {
         var activeLabels = document.getElementsByClassName("tab-label-active");
 
-        for (var offset = 0; offset < activeLabels.length; offset++){
+        for (var offset = 0; offset < activeLabels.length; offset++) {
             current = activeLabels[offset];
             current.className = current.className.replace(" tab-label-active", "");
         }
     }
 
-    function setActiveTabLabel(tabLabel){
+    function setActiveTabLabel(tabLabel) {
         tabLabel.className += " tab-label-active"
     }
 
-    function setActiveTab(tab){
+    function setActiveTab(tab) {
         tab.className = tab.className.replace("tab-inactive", "tab-active");
     }
 
-    function switchToTab(tabGroup, tabLabel){
+    function switchToTab(tabGroup, tabLabel) {
         let targetTab = getTabForLabel(tabGroup, tabLabel);
 
         resetTabLabels();
@@ -314,13 +318,13 @@ class CakesController extends AppController {
         setActiveTab(targetTab);
     }
 
-    function getTabForLabel(tabs, tabLabel){
+    function getTabForLabel(tabs, tabLabel) {
         let targetTabId = tabLabel.attributes['data_targetTabId'].value;
         return document.getElementById(targetTabId);
     }
 
-    function initializeTabGroups(tabLables, tabs, defaultTabLabel){
-        for (var offset = 0; offset < tabLables.length; offset++){
+    function initializeTabGroups(tabLables, tabs, defaultTabLabel) {
+        for (var offset = 0; offset < tabLables.length; offset++) {
             let tabLabel = tabLables[offset];
             tabLabel.addEventListener("click", function () {
                 switchToTab(tabs, tabLabel);
@@ -330,8 +334,8 @@ class CakesController extends AppController {
         switchToTab(tabs, defaultTabLabel)
     }
 
-    let leftTabPanel = document.getElementById("left-tab-panel"); 
-    let rightTabPanel = document.getElementById("right-tab-panel"); 
+    let leftTabPanel = document.getElementById("left-tab-panel");
+    let rightTabPanel = document.getElementById("right-tab-panel");
 
     var leftTabLabels = leftTabPanel.getElementsByClassName("tab-label");
     var rightTabLabels = rightTabPanel.getElementsByClassName("tab-label");

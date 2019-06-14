@@ -23,6 +23,11 @@ body {
     flex-direction: row;
 }
 
+.tab-panel-area {
+    display: flex; 
+    overflow: hidden;
+}
+
 .tab-panel {
     display: flex;
     flex-direction: column;
