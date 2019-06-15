@@ -24,6 +24,7 @@ body {
 }
 
 .tab-panel-area {
+    width: 100%;
     display: flex; 
     overflow: hidden;
 }
